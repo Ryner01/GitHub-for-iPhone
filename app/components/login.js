@@ -1,4 +1,8 @@
 var React = require('react-native');
+var cliendId = require('../../appkey.js');
+var qs = require('shitty-qs');
+
+var state = Math.random().toString();
 
 var {
   View,
@@ -60,11 +64,34 @@ class Login extends React.Component {
     };
   }
 
-  handleChange(field, e) {
-    this.setState({
-      [field]: e.nativeEvent.text
-    });
-    console.log('username: ' + this.state.username + ' password: ' + this.state.password);
+  componentDidMount() {
+    LinkingIOS.addEventListener('url', this.handleUrl);
+  }
+
+  handlePress() {
+    let clientKey = cliendId.app_key;
+
+    LinkingIOS.openURL(
+      `https://github.com/login/oauth/authorize?client_id=${clientKey}&scope=user&redirect_uri=githubforiphone://&state=${state}`
+    );
+  }
+
+  handleUrl(e) {
+    let clientKey = cliendId.app_key;
+    let clientSecret = cliendId.client_secret;
+    let url = e.url.split('?');
+
+    let data = qs(url[1]);
+
+    fetch(`https://github.com/login/oauth/access_token?client_id=${clientKey}&client_secret=${clientSecret}&code=${data.code}&state=${data.state}`)
+      .then((response) => response.text())
+      .then((resText) => {
+        let resArray = qs(resText);
+        console.log(resArray);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -74,7 +101,7 @@ class Login extends React.Component {
           source={require('image!logo')}
           style={styles.logo}
         />
-        <TouchableHighlight style={styles.button} underlayColor="rgba(255,255,255,0)">
+        <TouchableHighlight onPress={this.handlePress} style={styles.button} underlayColor="rgba(255,255,255,0)">
           <Text style={styles.buttonText}>Sign in ></Text>
         </TouchableHighlight>
       </View>
