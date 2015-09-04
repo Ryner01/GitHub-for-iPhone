@@ -1,6 +1,8 @@
 var React = require('react-native');
 var cliendId = require('../../appkey.js');
 var qs = require('shitty-qs');
+var api = require('../api.js');
+var Profile = require('./Profile.js');
 
 var state = Math.random().toString();
 
@@ -65,14 +67,13 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    LinkingIOS.addEventListener('url', this.handleUrl);
+    LinkingIOS.addEventListener('url', this.handleUrl.bind(this));
   }
 
   handlePress() {
     let clientKey = cliendId.app_key;
-
     LinkingIOS.openURL(
-      `https://github.com/login/oauth/authorize?client_id=${clientKey}&scope=user&redirect_uri=githubforiphone://&state=${state}`
+      `https://github.com/login/oauth/authorize?client_id=${clientKey}&scope=user,repo&redirect_uri=githubforiphone://&state=${state}`
     );
   }
 
@@ -80,19 +81,31 @@ class Login extends React.Component {
     let clientKey = cliendId.app_key;
     let clientSecret = cliendId.client_secret;
     let url = e.url.split('?');
-
-    let data = qs(url[1]);
+    let urlSplit = url[1];
+    let data = qs(urlSplit);
 
     fetch(`https://github.com/login/oauth/access_token?client_id=${clientKey}&client_secret=${clientSecret}&code=${data.code}&state=${data.state}`)
       .then((response) => response.text())
-      .then((resText) => {
-        let resArray = qs(resText);
-        console.log(resArray);
+      .then((text) => {
+        let token = qs(text);
+        this.getProfile(token);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  getProfile(token) {
+    api.getCompleteProfile(token)
+      .then((res) => {
+        this.props.navigator.push({
+          title: 'Your Profile',
+          component: Profile,
+          passProps: {profile: res, token: token}
+        });
+      });
+  }
+
 
   render() {
     return (
