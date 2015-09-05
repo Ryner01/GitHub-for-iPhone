@@ -16,6 +16,7 @@ var {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 1000,
     backgroundColor: '#f5f5f5'
   },
 
@@ -30,6 +31,7 @@ var styles = StyleSheet.create({
   },
 
   headerContainer: {
+    flex: 1,
     height: 200
   },
 
@@ -64,9 +66,11 @@ var styles = StyleSheet.create({
   },
 
   followContainer: {
+    flex: 1,
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: 15
+    marginTop: 15,
+    marginBottom: 15,
   },
 
   followText: {
@@ -103,6 +107,7 @@ class Profile extends React.Component {
               <Text style={styles.textName}>{this.props.profile.name}</Text>
             </BlurView>
           </Image>
+          </View>
           <View style={styles.followContainer}>
             <View style={styles.followText}>
               <Text style={styles.followTextActual}>{this.props.profile.following}</Text>
@@ -114,7 +119,6 @@ class Profile extends React.Component {
             </View>
           </View>
           <PopularRepositories token={this.props.token} profile={this.props.profile} />
-        </View>
       </ScrollView>
     );
   }
