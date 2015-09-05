@@ -1,0 +1,53 @@
+{
+  "name": "react-native-device",
+  "version": "1.0.0",
+  "description": "UIDevice wrapper for React Native",
+  "main": "Device.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GertjanReynaert/react-native-device.git"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "device",
+    "detection",
+    "UIDevice",
+    "model",
+    "name"
+  ],
+  "author": {
+    "name": "Gertjan Reynaert"
+  },
+  "license": "MIT",
+  "gitHead": "71cbcf675371792c5cb6adfcab94cebeb894f904",
+  "bugs": {
+    "url": "https://github.com/GertjanReynaert/react-native-device/issues"
+  },
+  "homepage": "https://github.com/GertjanReynaert/react-native-device#readme",
+  "_id": "react-native-device@1.0.0",
+  "_shasum": "3ab0a603d290728bea6540a81259bae9ca00a550",
+  "_from": "react-native-device@*",
+  "_npmVersion": "2.14.0",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "gertjanreynaert",
+    "email": "gertjan@typework.com"
+  },
+  "maintainers": [
+    {
+      "name": "gertjanreynaert",
+      "email": "gertjan@typework.com"
+    }
+  ],
+  "dist": {
+    "shasum": "3ab0a603d290728bea6540a81259bae9ca00a550",
+    "tarball": "http://registry.npmjs.org/react-native-device/-/react-native-device-1.0.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/react-native-device/-/react-native-device-1.0.0.tgz"
+}

@@ -22,7 +22,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		86FCFC871B988A9D00F78A61 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86FCFC861B988A9D00F78A61 /* images.xcassets */; };
+		86EF98431B9B010F00DF978E /* BlurViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EF98411B9B010F00DF978E /* BlurViewManager.m */; };
+		86EF98441B9B010F00DF978E /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 86EF98421B9B010F00DF978E /* index.js */; };
+		86EF98521B9B170100DF978E /* Device.js in Resources */ = {isa = PBXBuildFile; fileRef = 86EF984B1B9B170100DF978E /* Device.js */; };
+		86EF98531B9B170100DF978E /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 86EF984D1B9B170100DF978E /* DeviceUtil.m */; };
+		86EF98541B9B170100DF978E /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 86EF984E1B9B170100DF978E /* package.json */; };
+		86EF98581B9B277500DF978E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF98571B9B277500DF978E /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +131,14 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		86FCFC861B988A9D00F78A61 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		86EF98401B9B010F00DF978E /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
+		86EF98411B9B010F00DF978E /* BlurViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurViewManager.m; sourceTree = "<group>"; };
+		86EF98421B9B010F00DF978E /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		86EF984B1B9B170100DF978E /* Device.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Device.js; sourceTree = "<group>"; };
+		86EF984C1B9B170100DF978E /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
+		86EF984D1B9B170100DF978E /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
+		86EF984E1B9B170100DF978E /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		86EF98571B9B277500DF978E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +251,6 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				86FCFC861B988A9D00F78A61 /* images.xcassets */,
 				86FCFC881B988AEB00F78A61 /* New Group */,
 			);
 			path = github;
@@ -289,6 +300,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				86EF98571B9B277500DF978E /* Images.xcassets */,
+				86EF98481B9B170100DF978E /* react-native-device */,
+				86EF983F1B9B010F00DF978E /* blur-view */,
 				13B07FAE1A68108700A75B9A /* github */,
 				00E356EF1AD99517003FC87E /* githubTests */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -305,6 +319,27 @@
 				00E356EE1AD99517003FC87E /* githubTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		86EF983F1B9B010F00DF978E /* blur-view */ = {
+			isa = PBXGroup;
+			children = (
+				86EF98401B9B010F00DF978E /* BlurView.h */,
+				86EF98411B9B010F00DF978E /* BlurViewManager.m */,
+				86EF98421B9B010F00DF978E /* index.js */,
+			);
+			path = "blur-view";
+			sourceTree = "<group>";
+		};
+		86EF98481B9B170100DF978E /* react-native-device */ = {
+			isa = PBXGroup;
+			children = (
+				86EF984B1B9B170100DF978E /* Device.js */,
+				86EF984C1B9B170100DF978E /* DeviceUtil.h */,
+				86EF984D1B9B170100DF978E /* DeviceUtil.m */,
+				86EF984E1B9B170100DF978E /* package.json */,
+			);
+			path = "react-native-device";
 			sourceTree = "<group>";
 		};
 		86FCFC881B988AEB00F78A61 /* New Group */ = {
@@ -513,9 +548,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FCFC871B988A9D00F78A61 /* images.xcassets in Resources */,
+				86EF98521B9B170100DF978E /* Device.js in Resources */,
 				008F07F31AC5B25A0029DE68 /* main.jsbundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				86EF98581B9B277500DF978E /* Images.xcassets in Resources */,
+				86EF98541B9B170100DF978E /* package.json in Resources */,
+				86EF98441B9B010F00DF978E /* index.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +573,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				86EF98531B9B170100DF978E /* DeviceUtil.m in Sources */,
+				86EF98431B9B010F00DF978E /* BlurViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
