@@ -1,5 +1,5 @@
 var React = require('react-native');
-var api = require('../api.js');
+var api = require('../utils/api.js');
 
 var {
   View,
@@ -44,7 +44,8 @@ var styles = StyleSheet.create({
     borderBottomColor: 'rgba(0,0,0,0)',
     borderTopColor: '#e8e8e8',
     borderLeftColor: '#e8e8e8',
-    borderRightColor: '#e8e8e8'
+    borderRightColor: '#e8e8e8',
+    flexDirection: 'row',
   },
 
   repoNameText: {
@@ -63,6 +64,26 @@ var styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 20,
+    textAlign: 'center'
+  },
+
+  starWarp: {
+    flexDirection: 'row',
+  },
+
+  repoStar: {
+    height: 16,
+    width: 16,
+    paddingLeft: 30
+  },
+
+  repoButtonWarp: {
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+
+  noRepositories: {
     textAlign: 'center'
   }
 
@@ -88,12 +109,17 @@ class PopularRepositories extends React.Component {
 
   render() {
     let popularRepos = this.state.repos;
-    console.log(popularRepos);
     let list = popularRepos.map((item, index) => {
       while(index <= 6) {
         return (
           <TouchableHighlight style={styles.repoName} underlayColor="#c1c1c1" key={index}>
-            <Text style={styles.repoNameText}>{item.name}</Text>
+            <View style={styles.repoButtonWarp}>
+              <Text style={styles.repoNameText}>{item.name}</Text>
+              <View style={styles.starWarp}>
+                <Text>{item.stargazers_count}</Text>
+                <Image source={require('image!star')} resizeMode='contain' style={styles.repoStar}/>
+              </View>
+            </View>
           </TouchableHighlight>
         );
       }

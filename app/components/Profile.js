@@ -1,8 +1,10 @@
 var React = require('react-native');
-var BlurView = require('../../iOS/blur-view/index.js');
-var Device = require('react-native-device');
-var DeviceWidth = Device.width;
 var PopularRepositories = require('./PopularRepositories.js');
+var ContributedRepositories = require('./ContributedRepositories.js');
+var ProfileBasicInfo = require('./ProfileBasicInfo.js');
+var ViewFeedPrivate = require('./ViewFeedPrivate.js');
+var ProfileHeader = require('./ProfileHeader.js');
+var api = require('../utils/api.js');
 
 var {
   View,
@@ -19,106 +21,62 @@ var styles = StyleSheet.create({
     height: 1000,
     backgroundColor: '#f5f5f5'
   },
-
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: 'gray'
-  },
-
-  headerImg: {
-    height: 200
-  },
-
-  headerContainer: {
-    flex: 1,
-    height: 200
-  },
-
-  blur: {
-    height: 200
-  },
-
-  profileImg: {
-    height: 70,
-    width: 70,
-    alignSelf: 'center',
-    marginTop: 80,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: 'white'
-  },
-
-  textName: {
-    width: 150,
-    fontSize: 20,
-    textAlign: 'center',
-    alignSelf: 'center',
-    marginTop: 12,
-    color: 'white',
-    backgroundColor: 'rgba(255,255,255,0)'
-  },
-
-  omg: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-  },
-
-  followContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    marginTop: 15,
-    marginBottom: 15,
-  },
-
-  followText: {
-    width: DeviceWidth / 2,
-  },
-
-  followTextActual: {
-    textAlign: 'center',
-    fontSize: 30
-  },
-
-  followLabel: {
-    textAlign: 'center'
-  }
-
 });
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reposContrib: [],
+      hasContRepos: false,
+      hasPopularRepos: false,
+      popularRepos: []
+    }
   }
 
   componentDidMount() {
-    console.log(this.props.profile);
+   let repos = api.getContributedRepos(this.props.profile)
+      .then((res) => {
+        if (res !== null) {
+          let sortRes = res.sort((a, b) => a.stargazers_count - b.stargazers_count);
+          this.setState({
+            reposContrib: sortRes,
+          });
+        };
+    });
+
+    let popularRepos = api.getAuthUserRepos(this.props.token)
+      .then((res) => {
+        let sortRes = res.sort((a, b) => a.stargazers_count - b.stargazers_count);
+        this.setState({
+          popularRepos: sortRes,
+        });
+      });
+  }
+
+  renderList(name, list) {
+    return(
+      <ContributedRepositories name={name} repos={list} />
+    );
+  }
+
+  renderEmpty() {
+    return(
+      <View></View>
+    );
   }
 
   render() {
+    let popularRepositories = (this.state.popularRepos.length !== 0) ? this.renderList('Popular', this.state.popularRepos) : this.renderEmpty();
+    let contributedRepositoriesList = (this.state.reposContrib.length !== 0) ? this.RenderList('Contributed', this.state.reposContrib) : this.renderEmpty();
+
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Image source={{uri: this.props.profile.avatar_url}} style={styles.headerImg}>
-            <BlurView style={styles.omg}>
-              <Image source={{uri: this.props.profile.avatar_url}} style={styles.profileImg} />
-              <Text style={styles.textName}>{this.props.profile.name}</Text>
-            </BlurView>
-          </Image>
-          </View>
-          <View style={styles.followContainer}>
-            <View style={styles.followText}>
-              <Text style={styles.followTextActual}>{this.props.profile.following}</Text>
-              <Text style={styles.followLabel}>Following</Text>
-            </View>
-            <View style={styles.followText}>
-              <Text style={styles.followTextActual}>{this.props.profile.followers}</Text>
-              <Text style={styles.followLabel}>Followers</Text>
-            </View>
-          </View>
-          <PopularRepositories token={this.props.token} profile={this.props.profile} />
+        <ProfileHeader navigator={this.props.navigator} profile={this.props.profile} />
+        <ProfileBasicInfo profile={this.props.profile} />
+        {popularRepositories}
+        {contributedRepositoriesList}
+        <ViewFeedPrivate profile={this.props.profile} />
       </ScrollView>
     );
   }

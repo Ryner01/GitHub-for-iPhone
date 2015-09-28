@@ -1,7 +1,7 @@
 var React = require('react-native');
 var cliendId = require('../../appkey.js');
 var qs = require('shitty-qs');
-var api = require('../api.js');
+var api = require('../utils/api.js');
 var Profile = require('./Profile.js');
 
 var state = Math.random().toString();
@@ -101,7 +101,7 @@ class Login extends React.Component {
         this.props.navigator.push({
           title: 'Your Profile',
           component: Profile,
-          passProps: {profile: res, token: token}
+          passProps: {profile: res, token: token, navigator: this.props.navigator}
         });
       });
   }
